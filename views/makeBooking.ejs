@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book <%= car.name %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen py-10">
+    <div
+      class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-3 border border-gray-100"
+    >
+      <!-- Car Info Sidebar -->
+      <div class="bg-slate-900 p-8 text-white md:col-span-1">
+        <h2 class="text-2xl font-bold mb-6">Reservation Details</h2>
+        <img
+          src="<%= car.image %>"
+          alt="<%= car.name %>"
+          class="w-full h-48 object-cover rounded-xl mb-6 shadow-lg ring-4 ring-slate-800"
+        />
+        <div class="space-y-4 text-sm">
+          <p><strong>Name:</strong> <%= car.name %></p>
+          <p><strong>Model:</strong> <%= car.model %></p>
+          <p><strong>Price:</strong> $<%= car.price %> / day</p>
+          <p>
+            <strong>Type:</strong>
+            <span class="capitalize"><%= car.type %></span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="p-8 md:col-span-2">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-3xl font-bold text-gray-800">Confirm Your Booking</h2>
+          <a
+            href="/secure/user"
+            class="flex items-center gap-2 text-blue-600 border-blue-500 border-2 rounded-lg text-sm px-4 py-1 rounded-lg hover:bg-blue-700 hover:text-white transition"
+          >
+            <i data-lucide="layout-dashboard"></i>
+            Dashboard
+          </a>
+        </div>
+        <form action="/booking/make" method="POST" class="space-y-4">
+          <!-- Car ID from Controller requirements -->
+          <input type="hidden" name="id" value="<%= car._id %>" />
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 font-semibold text-sm mb-1"
+                >From Date</label
+              >
+              <input
+                type="date"
+                name="from"
+                required
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-400 outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-700 font-semibold text-sm mb-1"
+                >To Date</label
+              >
+              <input
+                type="date"
+                name="to"
+                required
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-400 outline-none"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-gray-700 font-semibold text-sm mb-1"
+              >Delivery Address</label
+            >
+            <textarea
+              name="address"
+              placeholder="Where should we drop off the car?"
+              required
+              class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-400 outline-none h-20"
+            ></textarea>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-gray-700 font-semibold text-sm mb-1"
+                >Phone Number</label
+              >
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+1..."
+                required
+                class="w-full border rounded p-2 focus:ring-2 focus:ring-blue-400 outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-gray-700 font-semibold text-sm mb-1"
+                >Payment Method</label
+              >
+              <select
+                name="payment"
+                class="w-full border rounded p-2 bg-white focus:ring-2 focus:ring-blue-400 outline-none"
+              >
+                <option value="cash">Cash</option>
+                <option value="online">Online Payment</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t mt-6 flex justify-between items-center">
+            <div class="text-gray-500 text-xs italic">
+              Booking status will be set to 'Pending' for admin approval.
+            </div>
+            <button
+              type="submit"
+              class="bg-blue-600 text-white px-8 py-2 rounded-full font-bold hover:bg-blue-700 transition"
+            >
+              Confirm Booking
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="text-center mt-6 text-gray-400 text-sm">
+      Logged in as <%= user.name %>
+    </div>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>

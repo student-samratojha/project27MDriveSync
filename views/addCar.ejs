@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Car</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen py-10">
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Register New Vehicle</h2>
+            <a href="/secure/admin" class="text-sm text-gray-500 hover:underline">Back to Admin</a>
+        </div>
+
+        <form action="/car/add" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="md:col-span-1">
+                <label class="block text-gray-700 text-sm font-bold mb-1">Car Name</label>
+                <input type="text" name="name" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Model</label>
+                <input type="text" name="model" placeholder="e.g. model 5" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-green-500 outline-none">
+            </div> <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Model Year</label>
+                <input type="text" name="modelYear" placeholder="e.g. 2023" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Seats</label>
+                <input type="number" name="seat" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Price per Day</label>
+                <input type="number" name="price" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-green-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Car Type</label>
+                <select name="type" class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-green-500 outline-none">
+                    <option value="ordinary">Ordinary</option>
+                    <option value="luxary">Luxury</option>
+                </select>
+            </div>
+            <div class="md:col-span-2">
+                <label class="block text-gray-700 text-sm font-bold mb-1">Image URL</label>
+                <input type="text" name="image" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-green-500 outline-none" placeholder="https://example.com/car.jpg">
+            </div>
+            
+            <div class="md:col-span-2 mt-4">
+                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded font-bold hover:bg-green-700 transition">Save Car Information</button>
+            </div>
+        </form>
+
+        <div class="mt-6 p-4 bg-yellow-50 text-xs text-yellow-700 rounded border border-yellow-200">
+            <p><strong>Admin Note:</strong> Adding a car will automatically generate a unique COC identifier based on name and model as per the controller logic.</p>
+        </div>
+    </div>
+</body>
+</html>

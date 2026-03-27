@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Cars | CarEase</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-slate-100 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md border-b border-slate-200 px-8 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+
+            <div class="flex items-center gap-3">
+                <i data-lucide="car-front" class="w-7 h-7 text-blue-600"></i>
+                <h1 class="text-2xl font-bold text-slate-800">CarEase Garage</h1>
+            </div>
+
+            <a href="/secure/user"
+               class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                <i data-lucide="layout-dashboard"></i>
+                Dashboard
+            </a>
+
+        </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="max-w-7xl mx-auto py-10 px-6">
+
+        <!-- Header -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border border-slate-200">
+            <div class="flex items-center gap-3 mb-2">
+                <i data-lucide="warehouse" class="w-8 h-8 text-blue-600"></i>
+                <h2 class="text-3xl font-bold text-slate-800">Available Cars</h2>
+            </div>
+            <p class="text-slate-500">Explore and book your next ride easily.</p>
+        </div>
+
+        <!-- Cars Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+            <% cars.forEach(car => { %>
+
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden hover:shadow-xl transition">
+
+                    <!-- Car Image -->
+                    <div class="h-52 overflow-hidden">
+                        <img src="<%= car.image %>"
+                             class="w-full h-full object-cover"
+                             alt="Car">
+                    </div>
+
+                    <!-- Details -->
+                    <div class="p-5">
+
+                        <div class="flex items-center gap-2 mb-3">
+                            <i data-lucide="car" class="w-5 h-5 text-blue-600"></i>
+                            <h3 class="text-lg font-bold text-slate-800"><%= car.name %></h3>
+                        </div>
+
+                        <div class="space-y-2 text-sm text-slate-600">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="tag" class="w-4 h-4 text-orange-500"></i>
+                                <span>Model: <%= car.model %></span>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="calendar" class="w-4 h-4 text-blue-500"></i>
+                                <span>Year: <%= car.modelYear %></span>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="badge-dollar-sign" class="w-4 h-4 text-green-600"></i>
+                                <span>Price: ₹<%= car.price %> / day</span>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="users" class="w-4 h-4 text-purple-600"></i>
+                                <span><%= car.seat %> Seats</span>
+                            </div>
+
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="info" class="w-4 h-4 text-indigo-500"></i>
+                                <span class="capitalize">Type: <%= car.type %></span>
+                            </div>
+
+                           
+                        </div>
+
+                        <!-- Action -->
+                        <div class="mt-5 pt-4 border-t border-slate-200">
+
+                            <% if(car.isDeleted) { %>
+
+                                <button class="w-full bg-gray-400 text-white py-2 rounded-lg cursor-not-allowed">
+                                    Disabled
+                                </button>
+
+                            <% } else if(car.isBooked) { %>
+
+                                <button class="w-full bg-red-500 text-white py-2 rounded-lg cursor-not-allowed">
+                                    Booked
+                                </button>
+
+                            <% } else { %>
+
+                                <a href="/booking/make/<%= car._id %>"
+                                   class="flex justify-center items-center gap-2 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+
+                                    <i data-lucide="calendar-check"></i>
+                                    Book Now
+
+                                </a>
+
+                            <% } %>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>

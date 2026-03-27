@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car - <%= car.name %></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen py-10">
+    <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+            <h2 class="text-2xl font-bold text-gray-800">Edit Car: <%= car.name %></h2>
+            <a href="/secure/admin" class="text-sm text-blue-600 hover:underline">Back to Admin</a>
+        </div>
+
+        <form action="/car/edit" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Hidden ID field required by postEditCar -->
+            <input type="hidden" name="id" value="<%= car._id %>">
+
+            <div class="md:col-span-2">
+                <label class="block text-gray-700 text-sm font-bold mb-1">Car Name</label>
+                <input type="text" name="name" value="<%= car.name %>" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Model Year</label>
+                <input type="text" name="model" value="<%= car.model %>" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Seats</label>
+                <input type="number" name="seat" value="<%= car.seat %>" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Price per Day</label>
+                <input type="number" name="price" value="<%= car.price %>" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+            <div>
+                <label class="block text-gray-700 text-sm font-bold mb-1">Car Type</label>
+                <select name="type" class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                    <option value="ordinary" <%= car.type === 'ordinary' ? 'selected' : '' %>>Ordinary</option>
+                    <option value="luxary" <%= car.type === 'luxary' ? 'selected' : '' %>>Luxury</option>
+                </select>
+            </div>
+            <div class="md:col-span-2">
+                <label class="block text-gray-700 text-sm font-bold mb-1">Image URL</label>
+                <input type="text" name="image" value="<%= car.image %>" required class="w-full px-3 py-2 border rounded focus:ring-2 focus:ring-blue-500 outline-none">
+                <img src="<%= car.image %>" class="mt-2 h-24 rounded border" alt="Preview">
+            </div>
+            
+            <div class="md:col-span-2 mt-4 space-y-2">
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded font-bold hover:bg-blue-700 transition">Update Car Details</button>
+                <p class="text-center text-xs text-gray-400">Updates will be logged in the system audit.</p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

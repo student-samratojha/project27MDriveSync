@@ -1,0 +1,24 @@
+const express = require("express");
+const app = express();
+require("dotenv").config();
+const cookieParser = require("cookie-parser");
+const connect = require("./db/db");
+const authRoutes = require("./routes/auth.routes");
+const secureRoutes = require("./routes/secure.routes");
+const carRoutes = require("./routes/car.routes");
+const bookingRoutes = require("./routes/booking.routes");
+const path = require("path");
+connect();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "../public")));
+app.use("/auth", authRoutes);
+app.use("/secure", secureRoutes);
+app.use("/car", carRoutes);
+app.use("/booking", bookingRoutes);
+app.get("/", (req, res) => {
+  res.render("index");
+});
+module.exports = app;
